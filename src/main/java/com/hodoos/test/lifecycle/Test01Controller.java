@@ -1,4 +1,4 @@
-package com.hodoos.test.test01;
+package com.hodoos.test.lifecycle;
 
 import java.util.HashMap;
 import java.util.Map;

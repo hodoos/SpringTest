@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hodoos.test.mybatis.dao.RealestateDAO">
+	
+	<select id="selectRealestate" resultType="com.hodoos.test.mybatis.model.Realestate"
+	parameterType="int">
+		SELECT
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`real_estate`
+		WHERE 
+			`id` = #{id}
+	
+	</select>
+	
+	<select id="selectRealestateRentPrice"
+	resultType="com.hodoos.test.mybatis.model.Realestate"
+	parameterType="int">
+		SELECT
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`real_estate`
+		WHERE 
+			`rentPrice` <![CDATA[ < ]]> #{rentPrice}
+	
+	
+	</select>
+	
+	<select id="selectRealestateAreaPrice"
+	resultType="com.hodoos.test.mybatis.model.Realestate"
+	parameterType="map">
+		SELECT
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`real_estate`
+		WHERE 
+			`area` <![CDATA[ >= ]]> #{area}
+			AND `price` <![CDATA[ <= ]]> #{price}
+	</select>
+	
+	<insert id="insertRealEstateByObject"
+	parameterType="com.hodoos.test.mybatis.model.Realestate">
+		INSERT INTO
+				`real_estate`
+			(
+				`realtorId`
+				, `address`
+				, `area`
+				, `type`
+				, `price`
+				, `rentPrice`
+				, `createdAt`
+				, `updatedAt`
+			)
+		VALUE
+		(
+				#{realtorId}
+				, #{address}
+				, #{area}
+				, #{type}
+				, #{price}
+				, #{rentPrice}
+				, now()
+				, now()
+		)
+		
+	
+	</insert>
+
+</mapper>
