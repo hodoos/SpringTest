@@ -49,7 +49,7 @@ public class RealestateController {
 	}
 	@RequestMapping("/4")
 	@ResponseBody
-	public String addRealEstate() {
+	public String addRealEstateByObject() {
 		Realestate realestate = new Realestate();
 		realestate.setRealtorId(3);
 		realestate.setAddress("푸르지용 리버 303동 1104호");
@@ -58,6 +58,32 @@ public class RealestateController {
 		realestate.setPrice(100000);
 		
 		int count = realestateBO.addRealEstateByObject(realestate);
-		return "처리결과 " + count;
+		return "입력 성공 : " + count;
+	}
+	
+	@RequestMapping("/5")
+	@ResponseBody
+	public String addRealEstate(@RequestParam("realtorId") int realtorId) {
+		
+		int count = realestateBO.addRealEstate(realtorId, "샹뗴빌리버 오피스텔 814호", 45, "월세", 100000, 120);
+		
+		return "삽입결과 : " + count;		
+				
+	}
+	
+	@RequestMapping("/6")
+	@ResponseBody
+	public String updateRealEstate() {
+		
+		//id가 24인 매물의 타입을 전세 price 70000
+		int count = realestateBO.updateRealEstate(14, "전세", 70000);
+		return "수정사항 : " + count;
+	}
+	
+	@RequestMapping("/7")
+	@ResponseBody
+	public String deleteRealEstate(@RequestParam("id") int id) {
+		int count = realestateBO.deleteRealEstate(id);
+		return "삭제결과 : " + count;
 	}
 }

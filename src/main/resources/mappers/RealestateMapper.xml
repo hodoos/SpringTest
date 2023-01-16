@@ -69,30 +69,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertRealEstateByObject"
 	parameterType="com.hodoos.test.mybatis.model.Realestate">
 		INSERT INTO
-				`real_estate`
-			(
-				`realtorId`
-				, `address`
-				, `area`
-				, `type`
-				, `price`
-				, `rentPrice`
-				, `createdAt`
-				, `updatedAt`
-			)
+			`real_estate`
+		(
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		)
 		VALUE
 		(
-				#{realtorId}
-				, #{address}
-				, #{area}
-				, #{type}
-				, #{price}
-				, #{rentPrice}
-				, now()
-				, now()
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, now()
+			, now()
 		)
 		
 	
 	</insert>
-
+	
+	<insert id="insertRealEstate" parameterType="map">
+		INSERT INTO
+			`real_estate`
+		(
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, now()
+			, now()
+		)
+	</insert>
+	
+	<update id="updateRealEstate" parameterType="map">
+		UPDATE
+			`real_estate`
+		SET
+		 	`type` = #{type}
+		 	, `price` = #{price}
+		 	, `updatedAt` = now()
+		WHERE
+			`id` = #{id}
+	
+	</update>
+	
+	<delete id="updateRealEstate" parameterType="int">
+		DELETE FROM
+			`real_estate`
+		WHERE
+		 	`id` = #{id}
+	</delete>
 </mapper>
