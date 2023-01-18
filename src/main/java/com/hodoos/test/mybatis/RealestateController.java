@@ -22,8 +22,8 @@ public class RealestateController {
 	@RequestMapping("/1")
 	@ResponseBody
 	public Realestate realestate(
-//			@RequestParam("id") int id
-			@RequestParam(value="id", defaultValue="1") int id
+			@RequestParam("id") int id
+//			@RequestParam(value="id", defaultValue="1") int id
 			) {
 		
 		Realestate realestate = realestateBO.getRealestate(id);
