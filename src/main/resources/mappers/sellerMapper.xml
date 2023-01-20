@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		VALUE
 		(
-			#{nickname}
+			#{nickName}
 			, #{profileImage}
 			, #{temperature}
 			, now()
@@ -26,6 +26,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 		
 	</insert>
+	
+	<select id="selectLastSeller" resultType="com.hodoos.test.jsp.model.Seller">
+		
+		SELECT
+			`id`
+			,`nickname`
+			, `profileImage`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		ORDER BY
+			`id` DESC
+		LIMIT
+			1
+	</select>
+	
+	<select id="selectSeller" parameterType="int"
+	resultType="com.hodoos.test.jsp.model.Seller">
+		SELECT
+			`id`
+			,`nickname`
+			, `profileImage`
+			, `temperature`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`seller`
+		WHERE
+			`id` = #{id}
+	</select>
 
 
 
