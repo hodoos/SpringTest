@@ -16,7 +16,7 @@
 	<div class="container">
 		<h1>판매자 추가</h1>
 		
-		<form>
+		<form method="post" action="/jsp/seller/add">
 			<label>닉네임 </label><input type="text" class="form-control col-3">
 			<label>프로필 사진 url</label><input type="text" class="form-control col-6">
 			<label>온도 </label><input type="text" class="form-control col-3">

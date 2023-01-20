@@ -133,7 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</update>
 	
-	<delete id="updateRealEstate" parameterType="int">
+	<delete id="deleteRealEstate" parameterType="int">
 		DELETE FROM
 			`real_estate`
 		WHERE
