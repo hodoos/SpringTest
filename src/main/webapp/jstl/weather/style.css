@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#wrap {
+	width:1200px;
+}
+
+.contents > .main-menu {
+	width:200px;
+	background-color:cornflowerblue;
+}
+
+.contents > .main-contents {
+	width:1000px;
+}
+
+.input-lable {
+        		width:120px;
+        	}
+
+footer > .logo {
+	width:200px;
+	height:100px;
+}
+
+footer > .copyright {
+	width:1000px;
+	height:100px;
+}

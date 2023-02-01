@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hodoos.test.ajax.dao.WebSiteDAO">
+	<select id="selectWebSiteList" resultType="com.hodoos.test.ajax.model.WebSite">
+		SELECT
+			`id`
+			, `name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`website`
+		ORDER BY `id` DESC;
+		
+	</select>
+	
+	<insert id="insertWebSite" parameterType="map">
+		INSERT INTO
+			`website`
+		(
+			`name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{name}
+			, #{url}
+			, now()
+			, now()
+		)
+		
+	</insert>
+	<select id="selectCountUrl" parameterType="string" resultType="int">
+		SELECT
+			count(1)
+		FROM
+			`website`
+		WHERE
+			`url` = #{url}
+	</select>
+	
+	<delete id="deleteWebSite" parameterType="int">
+		DELETE FROM
+			`website`
+		WHERE
+			`id` = #{id}
+	</delete>
+</mapper>

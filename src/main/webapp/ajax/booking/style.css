@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+#wrap {
+    width: 1200px;
+    margin: auto;
+}
+header {
+    height: 70px;
+}
+.main-menu {
+    height : 30px;
+    background-color: #d0936d;
+}
+.main-menu :hover{
+	background-color: purple;
+}
+section {
+    width: 1200px;
+}
+
+.inputBox {
+	width: 800px;
+	height: 40px;
+}
+.reserveBtn {
+	width: 800px;
+	height: 40px;
+}
+
+.bottom-contents {
+    height: 250px;
+}
+.reserveText {
+    font-size:larger
+}
+
+.bottom-contents > .bottom-left,.bottom-right {
+    background-color: #964B00;
+    align-items: center;
+    margin: auto;
+}
+.bottom-contents > .bottom-center {
+    background-color: chocolate;
+}
+#nonMembers {
+    display: none;
+}
+
+.subimage {
+    display: none; 
+}
