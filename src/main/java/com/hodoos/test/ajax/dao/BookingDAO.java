@@ -21,4 +21,10 @@ public interface BookingDAO {
 			, @Param("date") String date
 			, @Param("phoneNumber") String phoneNumber
 			, @Param("state") String state);
+	
+	public Booking selectBookingByNamePhoneNumber(
+			@Param("name") String name,
+			@Param("phoneNumber") String phoneNumber);
 }
+
+

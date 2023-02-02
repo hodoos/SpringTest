@@ -2,7 +2,6 @@ package com.hodoos.test.ajax.bo;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +30,10 @@ public class BookingBO {
 			, String phoneNumber) {
 		
 		return bookingDAO.getBookingList(name, day, headcount, date, phoneNumber, "대기중");
+	}
+	
+	public Booking findBooking(String name, String phoneNumber) {
+		
+		return bookingDAO.selectBookingByNamePhoneNumber(name, phoneNumber);
 	}
 }

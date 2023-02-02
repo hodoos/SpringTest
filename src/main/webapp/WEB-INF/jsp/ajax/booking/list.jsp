@@ -22,7 +22,7 @@
 	
 	          <nav>
 	              <ul class="main-menu nav d-flex justify-content-around">
-	                  <li><a href="#">팬션소개</a></li>
+	                  <li><a href="/ajax/booking/main">팬션소개</a></li>
 	                  <li><a href="#">객실보기</a></li>
 	                  <li><a href="/ajax/booking/input">예약하기</a></li>
 	                  <li><a href="/ajax/booking/list">예약목록</a></li>

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -74,4 +73,41 @@ public class BookingController {
 		
 		return result;
 	}
+	@GetMapping("/main")
+	public String mainPage() {
+		return "ajax/booking/booking";
+	}
+	
+	// 이름, 전화번호 전달 받고, 일치하는 결과 하나를 json 형태로 변환해서 리스펀스에 담는다.
+	@GetMapping("/find")
+	@ResponseBody
+	public Map<String, Object> findBooking(
+			@RequestParam("name") String name
+			, @RequestParam("phoneNumber") String phoneNumber) {
+		
+		Booking booking = bookingBO.findBooking(name, phoneNumber);
+		
+		Map<String, Object> result = new HashMap<>();
+
+		if(booking != null) {
+			result.put("result", "success");
+			result.put("booking", booking);
+		} else {
+			result.put("result", "fail");
+		}
+		// 조회가 성공하면 {"result":"success", "data":booking}
+		// 조회가 실패하면 {"result":"fail"}
+		
+		
+		
+		return result;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 }

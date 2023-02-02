@@ -29,10 +29,10 @@
 
             <nav>
                 <ul class="main-menu nav d-flex justify-content-around">
-                    <li>팬션소개</li>
-                    <li>객실보기</li>
-                    <li>예약안내</li>
-                    <li>커뮤니티</li>
+                    <li><a href="/ajax/booking/main">팬션소개</a></li>
+	                <li><a href="#">객실보기</a></li>
+	                <li><a href="/ajax/booking/input">예약하기</a></li>
+	                <li><a href="/ajax/booking/list">예약목록</a></li>
                 </ul>
             </nav>
             
@@ -55,17 +55,10 @@
                     <div class="bottom-center col-5 p-5">
                         <div>
                             <span class="reserveText font-weight-bold">예약 확인</span>
-                            <label class="small ml-2 mr-2">회원</label><input type="radio" id="checkbox1" name="checkbox" checked></input>
-                            <label class="small ml-2 mr-2">비회원</label><input type="radio" id="checkbox2" name="checkbox"></input>
                         </div>
                         <div id="forMembers">
-                            <div><label class="mr-3 ml-3">아이디 :</label><input type="text" class="w-75" id="membersId"> <br></div>
-                            <div><label class="mr-3">비밀번호 :</label><input type="text" class="w-75" id="membersPassword"> <br></div>
-                        </div>
-                        <div id="nonMembers">
-                            <div><label class="mr-4 ml-4">이름 :</label><input type="text" class="w-75" id="nonMembersName"> <br></div>
-                            <div><label class="mr-3">전화번호 :</label><input type="text" class="w-75" id="nonMembersNumber"> <br></div>
-                            <div><label class="mr-4 ml-4">날짜 :</label><input type="text" class="w-75" id="calenderBox"> <br></div>
+                            <div><label class="mr-3 ml-3">이름 :</label><input type="text" class="w-75" id="nameInput"> <br></div>
+                            <div><label class="mr-3">전화번호 :</label><input type="text" class="w-75" id="phoneNumberInput"> <br></div>
                         </div>
                         <button id="inquireBtn" class="btn bg-success float-right mr-3 mt-2">조회하기</button>
                     </div>
@@ -90,80 +83,32 @@
         </div>
         <script>
             $(document).ready(function(){
-                
-                function imageTest() {
-                    if($("#changeimage1").is(":visible")){
-                        $("#changeimage1").hide();
-                        $("#changeimage2").show();
-                    }
-                    else if($("#changeimage2").is(":visible")){
-                        $("#changeimage2").hide();
-                        $("#changeimage3").show();
-                    }
-                    else if($("#changeimage3").is(":visible")){
-                        $("#changeimage3").hide();
-                        $("#changeimage4").show();
-                    }
-                    else if($("#changeimage4").is(":visible")){
-                        $("#changeimage4").hide();
-                        $("#changeimage1").show();
-                    }
-                }
-                setInterval(imageTest, 2500);
-
-                $("#inquireBtn").on("click", function(){ // 유효성 검사
-                    let membersValue1 = $("#membersId").val();
-                    let membersValue2 = $("#membersPassword").val();
-                    let nonMembersValue1 = $("#nonMembersName").val();
-                    let nonMembersValue2 = $("#nonMembersNumber").val();
-                    let calenderData = $("#calenderBox").val();
-                    
-                    if($("#forMembers").is(":visible")){
-                        if(membersValue1 == "" || undefined){
-                            alert("ID 를 입력해주세요");
-                            return;
-                        }
-                        if(membersValue2 == "" || undefined){
-                            alert("PASSWORD 를 입력해주세요");
-                            return;
-                        }
-                    }
-                    if($("#nonMembers").is(":visible")) {
-                        if(nonMembersValue1 == "" || undefined){
-                            alert("이름 을 입력해주세요");
-                            return;
-                        }
-                        if(nonMembersValue2 == "" || undefined){
-                            alert("전화번호 를 입력해주세요");
-                            return;
-                        }
-                        if(!nonMembersValue2.startsWith("010")){
-                            alert("010 으로 시작하는 번호만 입력 가능합니다");
-                            return;
-                        }
-                        if(calenderData == "" || undefined){
-                            alert("날짜 를 선택해주세요");
-                            return;
-                        }
-                        
-                    }
-                })
-                //
-                $("#checkbox1").on("click",function() {
-                    $("#forMembers").show();
-                    $("#nonMembers").hide();
-                })
-                $("#checkbox2").on("click",function() {
-                    $("#forMembers").hide();
-                    $("#nonMembers").show();
-                })
-
-                $("#calenderBox").datepicker({
-                    dateFormat:"yy년 mm월 dd일",
-                    minDate: 1
-                });
-
-            })
+               $("#inquireBtn").on("click",function(){
+            	   let name = $("#nameInput").val();
+            	   let phoneNumber = $("#phoneNumberInput").val();
+            	   
+            	   $.ajax({
+            		   type:"get"
+            		   , url:"/ajax/booking/find"
+            		   , data:{"name":name, "phoneNumber":phoneNumber}
+            		   , success:function(data){
+            			   
+            			   if(data.result == "fail") {
+            				   alert("조회대상이 없습니다.");
+            			   } else{
+	           				   alert("이름 : " + data.booking.name  +
+	           						   "\n날짜 : " + data.booking.date.substring(0, 10) +
+	           						   "\n일수 : " + data.booking.day +
+	           						   "\n인원 : " + data.booking.headcount +
+	           						   "\n상태 : " + data.booking.state);
+            			   }
+            		   }
+            		   , error:function(){
+            			   alert("조회 오류");
+            		   }
+            	   });
+               });
+            });
 
         </script>
     </body>
